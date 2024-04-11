@@ -1,5 +1,3 @@
-function greet(name: string) {
-  console.log(`Hello, ${name}!`);
-}
+import project from './services/projects/MakePictureFrame';
 
-greet('Matt');
+console.log(`Here's how to make a picture frame: ${project.steps}`);
