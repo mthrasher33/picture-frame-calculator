@@ -122,7 +122,7 @@ class Measurement {
     }
     if (
       (unit1 === Unit.Meter && unit2 !== Unit.Centimeter) ||
-      (unit1 === Unit.Centimeter && unit2 === Unit.Meter)
+      (unit1 === Unit.Centimeter && unit2 !== Unit.Meter)
     ) {
       throw new Error(
         ErrorMessage.InvalidUnitPairing.replace('{unit1}', Unit.Meter).replace(

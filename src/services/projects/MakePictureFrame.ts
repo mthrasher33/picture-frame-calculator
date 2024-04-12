@@ -7,19 +7,11 @@ import Measurement from '../../classes/materials/Measurement';
 const glassMeasurement = {
   length: new Measurement([
     {
-      unit: Unit.Inch,
+      unit: Unit.Centimeter,
       value: 10
-    },
-    {
-      unit: Unit.Foot,
-      value: 3
     }
   ]),
   width: new Measurement([
-    {
-      unit: Unit.Foot,
-      value: 1
-    },
     {
       unit: Unit.Inch,
       value: 8

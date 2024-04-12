@@ -13,7 +13,7 @@ abstract class Rectangle {
   validate(length: Measurement, width: Measurement) {
     if (
       (length.isMetric() && !width.isMetric()) ||
-      (!length.isMetric && width.isMetric())
+      (!length.isMetric() && width.isMetric())
     ) {
       throw new Error(ErrorMessage.InvalidMeasurementSystemsPairing);
     }
