@@ -4,16 +4,18 @@ import MeasurementInterface from '../../interfaces/Measurement';
 import {
   footToMeter,
   meterToCentimeter,
-  inchToCentimeter
+  inchToCentimeter,
+  centimeterToInch
 } from '../../utils/unit-conversions';
 
 class Measurement {
   public measurement: MeasurementInterface[] = [];
-  private lengthInCentimeters: number = 0;
+  public centimeters: number = 0;
+  public inches: number = 0;
 
   constructor(measurement: MeasurementInterface[]) {
     this.validate(measurement);
-    this.setLengthInCentimeters();
+    this.setMathematicalLengths();
 
     if (this.measurement.length > 1) {
       this.sortByUnitSize();
@@ -21,7 +23,7 @@ class Measurement {
   }
 
   public isLongerThan(otherMeasurement: Measurement): Boolean {
-    return this.lengthInCentimeters > otherMeasurement.lengthInCentimeters;
+    return this.centimeters > otherMeasurement.centimeters;
   }
 
   public isMetric(): Boolean {
@@ -80,23 +82,27 @@ class Measurement {
     });
   }
 
-  private setLengthInCentimeters() {
+  private setMathematicalLengths() {
     const { measurement } = this;
     let length: number = 0;
     measurement.forEach(({ unit, value }) => {
       switch (unit) {
         case Unit.Foot:
           length += meterToCentimeter(footToMeter(value));
-          return;
+          break;
         case Unit.Inch:
           length += inchToCentimeter(value);
+          break;
         case Unit.Meter:
           length += meterToCentimeter(value);
+          break;
         default:
           length += value;
+          break;
       }
     });
-    this.lengthInCentimeters = length;
+    this.centimeters = length;
+    this.inches = centimeterToInch(length);
   }
 
   private validate(measurement: MeasurementInterface[]): void {

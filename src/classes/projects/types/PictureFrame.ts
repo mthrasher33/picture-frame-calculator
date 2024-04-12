@@ -12,22 +12,38 @@ class PictureFrame extends Project {
   constructor(
     public board: Board,
     public glass: Glass,
-    public rabbetDepth: Measurement
+    public rabbet: Measurement
   ) {
-    // Determine the steps
-    const steps = PictureFrame.generateSteps(board, glass);
+    const steps = PictureFrame.generateSteps(board, glass, rabbet);
     PictureFrame.steps = steps;
 
     super(board, PictureFrame.tools, PictureFrame.steps);
   }
 
-  private static generateSteps(board: Board, glass: Glass): Step[] {
+  private static generateSteps(
+    board: Board,
+    glass: Glass,
+    rabbet: Measurement
+  ): Step[] {
     return [
-      'pet the dog',
-      `use the saw on the ${board.species}`,
-      'drink the beer',
-      `cut the glass that is ${glass.length.toString()} long.`,
-      `cut the glass that is ${glass.width.toString()} wide.`
+      `Use a table saw to rip the board in half to ${(
+        board.width.inches / 2
+      ).toFixed(2)} inches`,
+      `Cut a 45 degree miter from the end of one board`,
+      `Measure the top rail to ${(
+        glass.length.inches -
+        2 * rabbet.inches
+      ).toFixed(2)} inches.`,
+      `Trace and cut a 45 degree miter beginning at this top rail measurement.`,
+      `Repeat with the next board in sequence. These are your length-wise rails.`,
+      `Measure the top rail to ${(
+        glass.width.inches -
+        2 * rabbet.inches
+      ).toFixed(2)} inches.`,
+      `Trace and cut a 45 degree miter beginning at this top rail measurement.`,
+      `Repeat with the next board in sequence. These are your width-wise rails.`,
+      `Route the rabbet on the top-rail side of each rail.`,
+      `Fit your glass in and clamp. Check for leeway. If it's good, glue it up!`
     ];
   }
 }

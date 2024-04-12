@@ -7,7 +7,7 @@ import Measurement from '../../classes/materials/Measurement';
 const glassMeasurement = {
   length: new Measurement([
     {
-      unit: Unit.Centimeter,
+      unit: Unit.Inch,
       value: 10
     }
   ]),
@@ -31,7 +31,7 @@ const boardMeasurement = {
   width: new Measurement([
     {
       unit: Unit.Inch,
-      value: 2.25
+      value: 4
     }
   ])
 };
